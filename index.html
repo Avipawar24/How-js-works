@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .dice {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            border: 5px solid black;
+            border-radius: 10px;
+            margin: 10px;
+            text-align: center;
+            line-height: 60px;
+            font-size: 50px;
+            font-weight: 800;
+        }
+
+        #winner {
+            margin-top: 30px;
+            font-weight: bolder;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+        }
+        #roll{
+            padding: 10px;
+            font-size: medium;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="member-1" class="dice"></div>
+    <div id="member-2" class="dice"></div>
+    <div id="member-3" class="dice"></div>
+    <div id="winner"></div>
+    <button id="roll">ROLL THE DICE</button>
+    <script>
+        document.getElementById("roll").addEventListener('click', function () {
+            var member1 = document.getElementById('member-1');
+            var member2 = document.getElementById('member-2');
+            var member3 = document.getElementById('member-3');
+            var winnerDiv = document.getElementById('winner');
+            var score1 = Math.floor(Math.random() * 6) + 1;
+            var score2 = Math.floor(Math.random() * 6) + 1;
+            var score3 = Math.floor(Math.random() * 6) + 1;
+
+            member1.textContent = score1;
+            member2.textContent = score2;
+            member3.textContent = score3;
+
+            var maxScore = Math.max(score1, score2, score3);
+            var minScore = Math.min(score1, score2, score3)
+
+            if (score1 === score2 && score2 === score3) {
+                winnerDiv.textContent='DRAW!'
+                member1.style.backgroundColor = 'blue';
+                member2.style.backgroundColor = 'blue';
+                member3.style.backgroundColor = 'blue';
+            } else {
+                if (score1 === maxScore) {
+                    member1.style.backgroundColor = 'green';
+                    member2.style.backgroundColor = 'red';
+                    member3.style.backgroundColor = 'red';
+                    winnerDiv.textContent = "Member A is a winner"
+                } else if (score2 === maxScore) {
+                    member1.style.backgroundColor = 'red';
+                    member2.style.backgroundColor = 'green';
+                    member3.style.backgroundColor = 'red';
+                    winnerDiv.textContent = "Member B is a winner"
+                } else if (score3 === maxScore) {
+                    member1.style.backgroundColor = 'red';
+                    member2.style.backgroundColor = 'red';
+                    member3.style.backgroundColor = 'green';
+                    winnerDiv.textContent = "Member C is a winner"
+                }
+                if (score1 === minScore) {
+                    member1.style.backgroundColor = 'yellow'
+                } else if (score2 === minScore) {
+                    member2.style.backgroundColor = 'yellow'
+                } else if (score3 === minScore) {
+                    member3.style.backgroundColor = 'yellow'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
